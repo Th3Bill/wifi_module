@@ -153,9 +153,9 @@ DFLAGS += -DDHD_SDALIGN=64 -DMAX_HDR_READ=64 -DDHD_FIRSTREAD=64
 endif
 
 WFLAGS := -Wall -Wstrict-prototypes
-ifeq (,$(findstring 2.4.18,$(LINUXVER)))
-WFLAGS += -Werror
-endif
+#ifeq (,$(findstring 2.4.18,$(LINUXVER)))
+#WFLAGS += -Werror
+#endif
 
 CFILES:= dhd_linux.c linux_osl.c bcmutils.c dhd_common.c dhd_custom_gpio.c
 CFILES += siutils.c sbutils.c aiutils.c hndpmu.c
@@ -256,10 +256,11 @@ DFLAGS += -DSOFTAP
 DFLAGS += -DKEEP_ALIVE
 DFLAGS += -DPNO_SUPPORT
 DFLAGS += -DCONFIG_FIRST_SCAN
+DFLAGS += -DCONFIG_LGE_BCM432X_PATCH
+DFLAGS += -DVOIP
 ifeq ("$(LINUX_MINOR)", "35")
 $(warning Gingerbread and K35.7 kernel needs extra defintions **)
 DFLAGS += -DHW_OOB
-DFLAGS += -DCSCAN
 endif
 else
 ifneq ($(findstring -oob-,-$(TARGET)-),)
@@ -297,10 +298,11 @@ DFLAGS += -DOOB_INTR_ONLY
 DFLAGS += -DMMC_SDIO_ABORT
 DFLAGS += -DSOFTAP
 DFLAGS += -DENABLE_ROAMING
-DFLAGS += -DCSCAN
+DFLAGS += -DCONFIG_FIRST_SCAN
 DFLAGS += -DPNO_SUPPORT
 DFLAGS += -DGET_CUSTOM_MAC_ENABLE
 DFLAGS += -DKEEP_ALIVE
+DFLAGS += -DEXAMPLE_TABLE
 DFLAGS += -DDHD_USE_STATIC_BUF
 DFLAGS += -DCONFIG_WIFI_CONTROL_FUNC
 ifeq ($(OEM_ANDROID),1)
